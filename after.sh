@@ -20,5 +20,9 @@ if [ ! -d "/tmp/redisearch" ]; then
     sudo service redis-server restart
 fi
 
-echo "---------- Restarting nginx ----------"
-sudo service nginx restart
+echo "---------- Installing assets ----------"
+cd /home/vagrant/code
+yarn install
+
+echo "---------- Compiling assets ----------"
+yarn run dev

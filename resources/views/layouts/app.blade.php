@@ -43,6 +43,12 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{route('admin.articles.compose')}}">
+                                        Compose a Post
+                                    </a>
+                                    <a class="dropdown-item" href="{{route('admin.categories')}}">
+                                        Manage Categories
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -61,6 +67,7 @@
         </nav>
 
         <main class="py-4">
+            @include('flash::message')
             @yield('content')
         </main>
     </div>
