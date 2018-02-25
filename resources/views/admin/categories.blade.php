@@ -27,7 +27,7 @@
                     </li>
                 @endforeach
 
-                {{Form::open(['route'=>'admin.category.add', 'method' => 'post'])}}
+                {{Form::open(['route'=>'admin.category.store', 'method' => 'post'])}}
                     <li class="list-group-item">
 
                     {{Form::text('title', '', [

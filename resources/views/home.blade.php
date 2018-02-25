@@ -8,32 +8,34 @@
     @foreach($articles as $article)
         <div class="row my-5">
             <div class="col">
-                <h1>
-                    <a href="{{route('article', [
+                @php
+                    $articleUrl = route('article', [
                         'category' => $article->category->slug,
                         'slug' => $article->slug
-                    ])}}">
+                    ]);
+                @endphp
+                <a class="badge badge-info" href="{{route('category', ['category' => $article->category->slug])}}">
+                    {{$article->category->title}}
+                </a>
+
+                <h1>
+                    <a href="{{$articleUrl}}">
                         {{$article->title}}
                     </a>
-
-                    <a class="small align-text-top" href="{{route('category', ['slug'=>$article->category->slug])}}">
-                        <span class="badge badge-info ml-2">
-                            <small>{{$article->category->title}}</small>
-                        </span>
-                    </a>
-
                 </h1>
 
-                <p class="lead">
-                    {{$article->brief}}
-                </p>
+                @auth
+                    <div class="row col">
+                    <a class="btn-sm btn-secondary float-left mr-1" href="{{route('admin.articles.compose', ['article'=> $article->id])}}">Edit</a>
+                    {{Form::open(['url'=> route('admin.articles.delete', ['article' => $article->id]), 'method'=> 'delete', 'class'=>'float-left'])}}
+                        {{Form::submit('Delete', ['class' => 'btn-sm btn-danger'])}}
+                    {{Form::close()}}
+                    </div>
+                @endauth
 
-                <a href="{{route('article', [
-                        'category' => $article->category->slug,
-                        'slug' => $article->slug
-                    ])}}">
-                    Read more...
-                </a>
+                <p class="lead">{{$article->brief}}</p>
+
+                <a href="{{$articleUrl}}">Read more...</a>
 
             </div>
         </div>

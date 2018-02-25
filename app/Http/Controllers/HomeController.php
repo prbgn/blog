@@ -38,8 +38,16 @@ class HomeController extends Controller
         ]);
     }
 
-    public function article()
+    public function article($category, $slug)
     {
+        $article = Article::where('slug', $slug)->first();
 
+        if (!$article) {
+            abort(404);
+        }
+
+        return view('article', [
+            'article' => $article
+        ]);
     }
 }

@@ -10,30 +10,45 @@ use Illuminate\Support\Facades\Auth;
 
 class ArticlesController extends Controller
 {
-    public function compose(Request $request)
+    /**
+     * @param Request $request
+     * @param Article $article
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function compose(Request $request, Article $article)
     {
-        $categories = Category::all()
-            ->pluck('title', 'id')
-            ->all();
+        $categories = Category::all();
+
+        $request
+            ->session()
+            ->flashInput($article->toArray());
 
         return view('admin.article.add', [
             'categories' => $categories
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         $title = $request->input('title');
-        $category = $request->input('category');
+        $category = $request->input('category_id');
         $brief = $request->input('brief');
         $content = $request->input('content');
 
+        $id = $request->input('id');
+
         if (empty($title) || empty($brief) ||  empty($content)) {
             flash('Please fill out all required fields')->error();
-            return redirect()->route('admin.articles.compose')->withInput();
+            return redirect()->back()->withInput();
         }
 
-        Article::create([
+        Article::updateOrCreate([
+            'id' => $id
+        ],[
             'user_id' => Auth::id(),
             'category_id' => $category,
             'slug' => str_slug($title),
@@ -42,8 +57,20 @@ class ArticlesController extends Controller
             'content' => $content
         ]);
 
-        flash('Post has been added')->success();
+        flash('Post has been saved')->success();
 
         return redirect()->route('home');
+    }
+
+    /**
+     * @param Article $article
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(Article $article)
+    {
+        $article->delete();
+
+        flash('Post has been deleted') ->success();
+        return redirect()->back();
     }
 }
