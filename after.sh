@@ -26,3 +26,10 @@ yarn install
 
 echo "---------- Compiling assets ----------"
 yarn run dev
+
+echo "---------- Executing migrations ----------"
+php artisan migrate
+
+echo "---------- Running Database Seeders ----------"
+php artisan db:seed --class=UsersTableSeeder
+php artisan db:seed
