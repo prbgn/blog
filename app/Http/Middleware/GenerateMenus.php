@@ -25,6 +25,7 @@ class GenerateMenus
                     'route' => ['category', 'category'=> $category->slug]
                 ]);
             }
+            $menu->add('About Blog', 'about');
         });
         return $next($request);
     }

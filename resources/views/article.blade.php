@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
-@section('content')
+@section('app.title', $article->title . ' | ' . $article->category->title)
+
+@section('app.content')
 <div class="container">
     <a class="badge badge-info mt-5" href="{{route('category', ['category' => $article->category->slug])}}">
         {{$article->category->title}}

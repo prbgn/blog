@@ -24,11 +24,12 @@ Route::middleware('auth')->namespace('Admin')->prefix('/admin')->group(function(
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::any('/search', 'SearchController@index')
+    ->name('search');
+
+Route::view('/about', 'about');
+
 Route::get('/{category}/{slug}', 'HomeController@article')
     ->name('article');
 Route::get('/{slug}', 'HomeController@category')
     ->name('category');
-
-
-Route::any('/search', 'SearchController@handle')
-    ->name('search');
