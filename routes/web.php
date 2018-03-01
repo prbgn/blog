@@ -29,3 +29,6 @@ Route::get('/{category}/{slug}', 'HomeController@article')
 Route::get('/{slug}', 'HomeController@category')
     ->name('category');
 
+
+Route::any('/search', 'SearchController@handle')
+    ->name('search');

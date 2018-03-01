@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $articles = Article::orderBy('id', 'desc')->get();
+        $articles = Article::orderBy('id', 'desc')->paginate(5);
 
         return view('home', [
             'articles' => $articles
@@ -30,7 +30,7 @@ class HomeController extends Controller
             abort(404);
         }
 
-        $articles = $category->articles;
+        $articles = $category->articles()->paginate(5);
 
         return view('home', [
             'category' => $category,

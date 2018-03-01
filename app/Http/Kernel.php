@@ -2,6 +2,7 @@
 
 namespace Blog\Http;
 
+use Blog\Http\Middleware\GenerateMenus;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -35,6 +36,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \Blog\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            GenerateMenus::class,
         ],
 
         'api' => [
