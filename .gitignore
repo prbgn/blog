@@ -14,3 +14,5 @@ yarn-error.log
 /Vagrantfile
 /Homestead.yaml
 /aliases
+/_ide_helper.php
+/yarn.lock
