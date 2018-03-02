@@ -1,13 +1,13 @@
 # laravel-blog
 
-###Requirements
+### Requirements
 
 1. PHP >= 7.1
 2. Composer
 3. Vagrant
 4. VirtualBox
 
-###Deployment
+### Deployment
 
 1. Install the composer's dependencies
 > composer create
