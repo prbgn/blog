@@ -17,3 +17,6 @@
 
 3. Run the Vagrant box
 > vagrant up
+
+
+Now the project should be available on http://192.168.10.10
