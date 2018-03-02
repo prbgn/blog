@@ -23,7 +23,5 @@ Now the project should be available on http://192.168.10.10
 
 User to login:
 
-admin@prbgn.com
-
-Test123
+admin@prbgn.com / Test123
 
