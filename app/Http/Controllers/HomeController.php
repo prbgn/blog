@@ -9,28 +9,38 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Article $model
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Article $model)
     {
-        $articles = Article::orderBy('id', 'desc')->paginate(5);
+        $articles = $model
+            ->orderBy('id', 'desc')
+            ->paginate(5);
 
         return view('home', [
             'articles' => $articles
         ]);
     }
 
-    public function category($slug)
+    /**
+     * @param Category $model
+     * @param $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function category(Category $model, $slug)
     {
-        $category = Category::where('slug', $slug)->first();
+        $category = $model
+            ->where('slug', $slug)
+            ->first();
 
         if (!$category) {
             abort(404);
         }
 
-        $articles = $category->articles()->paginate(5);
+        $articles = $category
+            ->articles()
+            ->paginate(5);
 
         return view('home', [
             'category' => $category,
@@ -38,9 +48,17 @@ class HomeController extends Controller
         ]);
     }
 
-    public function article($category, $slug)
+    /**
+     * @param Article $model
+     * @param $category
+     * @param $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function article(Article $model, $category, $slug)
     {
-        $article = Article::where('slug', $slug)->first();
+        $article = $model
+            ->where('slug', $slug)
+            ->first();
 
         if (!$article) {
             abort(404);
