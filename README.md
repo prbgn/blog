@@ -15,7 +15,7 @@
 2. Generate a Vagrant configuration file 
 > ./vendor/bin/homestead make
 
-3. Run the Vagrant box
+3. Run a Vagrant box
 > vagrant up
 
 
